@@ -1,0 +1,15 @@
+[project]
+name = "flatagent"
+version = "0.1.0"
+description = "Sucht neue Mietwohnungen und entwirft Anschreiben"
+requires-python = ">=3.11"
+dependencies = ["requests", "beautifulsoup4", "pyyaml", "anthropic"]
+
+[project.optional-dependencies]
+dev = ["pytest"]
+
+[tool.setuptools]
+packages = ["flatagent", "flatagent.sources"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

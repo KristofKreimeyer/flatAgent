@@ -1,0 +1,51 @@
+# Suchkriterien und Profil. Hier anpassen, der Code muss dafür nicht angefasst werden.
+search:
+  city: Holzwickede
+  radius_km: 6
+  rooms_min: 3
+  rooms_max: 4          # 4 Zimmer sind ok, falls bis 850 € warm
+  max_rent_warm: 850
+  # Orte im Umkreis von ca. 6 km um Holzwickede (Titel/Adresse wird dagegen geprüft)
+  allowed_places:
+    - Holzwickede
+    - Opherdicke
+    - Hengsen
+    - Massen
+    - Unna
+    - Dortmund-Aplerbeck
+    - Aplerbeck
+    - Schwerte
+    - Fröndenberg
+  # Wörter, bei denen ein Angebot sofort rausfällt
+  exclude_keywords:
+    - Tausch
+    - Senioren
+    - WG-Zimmer
+    - Zwischenmiete
+    - Nachmieter gegen Abstand
+
+sources:
+  kleinanzeigen: true
+  immowelt: true
+  immoscout24: true     # wird oft blockiert, Fehler werden nur geloggt
+
+profile:
+  name: Kristof Kreimeyer
+  occupation: Software-Entwickler
+  household: alleinerziehender Vater mit einer Tochter
+  income_yearly_gross: 56000
+  pets: keine
+  smoker: false
+  extra: >-
+    Unbefristetes Arbeitsverhältnis, ordentliche Schufa und Gehaltsnachweise
+    können sofort vorgelegt werden.
+
+letter:
+  model: claude-sonnet-5-5
+  tone: freundlich, sachlich, persönlich, maximal 180 Wörter
+  # Optional: eigene Vorlage mit Platzhaltern, sonst schreibt das Modell frei
+  template_file: letter_template.txt
+
+mail:
+  to: svd49.kk@gmail.com
+  digest: true          # eine Mail pro Lauf statt eine pro Angebot

@@ -1,0 +1,32 @@
+name: search
+on:
+  schedule:
+    - cron: "*/20 * * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write   # um state/seen.json zurückzuschreiben
+
+concurrency: flatagent
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - run: pip install .
+      - run: python -m flatagent.main
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          SMTP_USER: ${{ secrets.SMTP_USER }}
+          SMTP_PASSWORD: ${{ secrets.SMTP_PASSWORD }}
+      - name: Gesehene Angebote speichern
+        run: |
+          git config user.name "flatagent"
+          git config user.email "flatagent@users.noreply.github.com"
+          git add state/seen.json || true
+          git diff --cached --quiet || (git commit -m "state: update seen" && git push)
